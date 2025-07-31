@@ -18,13 +18,18 @@
       justify-content: flex-start;
       min-height: 100vh;
     }
-    /* Tabs */
+
+    /* Tabs styling */
     .tabs {
       display: flex;
       justify-content: center;
-      margin: 1rem 0;
-      flex-wrap: wrap;
       width: 100%;
+      background: linear-gradient(135deg, #FFDEE9, #FFC1E3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding-top: env(safe-area-inset-top);
+      margin-bottom: 1rem;
     }
     .tab-button {
       background: #fff;
@@ -43,16 +48,19 @@
       color: #fff;
       border-bottom: 2px solid #FFC0CB;
     }
+
     /* Tab content */
     .tab-content {
       display: none;
       width: 100%;
       max-width: 900px;
       flex: 1 1 auto;
+      padding-bottom: 2rem;
     }
     .tab-content.active {
       display: block;
     }
+
     /* Home card */
     .card {
       background: linear-gradient(135deg, #FFC0CB, #98FB98);
@@ -60,7 +68,9 @@
       border-radius: 20px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
       text-align: center;
-      margin-bottom: 2rem;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 600px;
     }
     .card h1 {
       font-family: 'Pacifico', cursive;
@@ -79,7 +89,7 @@
       margin-bottom: 1.5rem;
     }
     .placeholder-img {
-      width: 60%;
+      width: 100%;
       max-width: 350px;
       height: auto;
       border-radius: 15px;
@@ -100,9 +110,11 @@
     #confetti-button:hover {
       background: #007000;
     }
+
     /* Flip-card */
     .flip-card {
-      width: 400px;
+      width: 90%;
+      max-width: 400px;
       height: 500px;
       perspective: 1000px;
       margin: 0 auto 2rem;
@@ -139,6 +151,7 @@
       font-size: 2rem;
       color: #00A000;
       padding: 1rem;
+      min-height: 200px;
     }
     .flip-card-front .cake {
       font-size: 3rem;
@@ -161,12 +174,14 @@
     .flip-card-back .back-content li {
       margin-bottom: 0.8rem;
     }
+
     /* Responsive tweaks */
     @media (max-width: 600px) {
+      .tabs { flex-direction: column; }
+      .tab-button { flex: 1 1 100%; width: 100%; margin: 0.2rem 0; }
       .card { padding: 1.5rem; }
       .card h1 { font-size: 2.2rem; }
-      .flip-card { width: 100%; height: auto; }
-      .flip-card-inner, .flip-card-front, .flip-card-back { height: auto; }
+      .flip-card { width: 100%; }
       .flip-card-front { font-size: 1.5rem; padding: 0.5rem; }
       .flip-card-front .cake { font-size: 2.5rem; }
       .flip-card-back { padding: 0.5rem; }
@@ -186,7 +201,6 @@
       <h1>Happy 20th Birthday, Megan!</h1>
       <h2 id="timer-label">TIME UNTIL BIRTHDAY CELEBRATION</h2>
       <div id="countdown">Loading timer...</div>
-      <!-- Placeholder image; replace with your filename -->
       <img src="birthday_photo.jpg" alt="Birthday Photo" class="placeholder-img" />
       <button id="confetti-button">Celebrate!</button>
     </div>
@@ -202,7 +216,6 @@
         </div>
         <div class="flip-card-back">
           <div class="back-content">
-            <!-- Full message intact -->
             <p>Dear Megan,</p>
             <p>HAPPY BIRTHDAY PRINCESS U 20 (that’s a lil old hehe). JOKES JOKES, happy 20th birthday miss megan khanal, yk this is my 2nd time celebrating your birthday with u already wow, time really flies.</p>
             <p>I just wanna say thank you for having me apart of your birthday but also apart of ur life, you have a hectic life for sure and i’m so glad i am apart of it. In honour of your 20th Birthday, i think it’s fair I list 20 things I love about you.</p>
@@ -221,10 +234,62 @@
               <li>The fact you make me a better person. I can’t lie when I walked into uni I was dejected, I kinda wanted to just cruise through uni. But seeing you so hard working and intelligent, made me wanna be a better person, especially academically, pushing to be my best, so I could be close to matching you.</li>
               <li>THE FACT YOU CAN NOW DRIVE. FUCK YES DRIVE ME AROUND SOMETIMES.</li>
               <li>Your creative flair. Like I did not know how creative you were honestly. Making the bracelet for me so early on, it made me feel so special and I don’t know how to articulate how it made me feel. Nobody has ever done that for me, and it made me feel insanely special. Also your Spotify frame, with the cool added touch of the barcode (such a me thing) and your massive love heart card is something i’m never gonna forget.</li>
-              <li>Your musical and dance flair. I know you haven’t been going crazy on it, but you a really good dancer. I’m astounded on how one person can move their body like that. And ur voice is so goddamn good. I still remember having some goosebumps hearing it (also cause ur so cute).</li>
-              <li>THE FACT UR NEPALI. I know this sounds a bit weird, but having a girlfriend from the same country, apart from the family stuff is really nice. You understand me, my culture, expectations, and it’s something we can constantly yap about, and also destroy momos.</li>
-              <li>You make me feel special. I don’t know if I have said this already, but you make me the centre of attention, like I am him. But seriously, you make me the most important man in the world, listened to, understood, let me be me, for that I will be forever grateful.</li>
-              <li>Your entrepreneurial skills. Your tutoring business is so fucking underrated. Like you have a mini empire, you have managed to build your business from the ground up, from 60 bucks an hour, not affording the WWCC to now, raking it in with your variety of students. I don’t know anyone who’s managed to do that, and that’s seriously goddamn impressive, I am so proud of you.</li>
-              <li>MY BEST FRIEND, MY EVERYTHING FRIEND. What i mean by that is, your my best friend who I can do everything with. In my life i’ve always had different style of friends, including society life. It’s like all of those groups together, and that’s you. Somebody I can talk to about anything, do anything worth, say anything too, but also fucking eat with. You are like the friend i’ve missed in my life, the complete package. HEHE NOT JUST FRIEND, BEST FRIEND AND BEST GIRLFRIEND. IM NOT FRIENDZON
+              <li>Your musical and dance flair. IKnow you haven’t been going crazy on it, but you a really good dancer. I’m astounded on how one person can move their body like that. And ur voice is so goddamn good. I still remember having some goosebumps hearing it (also cause ur so cute).</li>
+              <li>THE FACT UR NEPALI. IKnow this sounds a bit weird, but having a girlfriend from the same country, apart from the family stuff is really nice. You understand me, my culture, expectations, and it’s something we can constantly yap about, and also destroy momos.</li>
+              <li>You make me feel special. IKnow if I have said this already, but you make me the centre of attention, like I am him. But seriously, you make me the most important man in the world, listened to, understood, let me be me, for that I will be forever grateful.</li>
+              <li>Your entrepreneurial skills. Your tutoring business is so fucking underrated. Like you have a mini empire, you have managed to build your business from the ground up, from 60 bucks an hour, not affording the WWCC to now, raking it in with your variety of students. IDon’t know anyone who’s managed to do that, and that’s seriously goddamn impressive, I am so proud of you.</li>
+              <li>MY BEST FRIEND, MY EVERYTHING FRIEND. What i mean by that is, your my best friend who I can do everything with. In my life i’ve always had different style of friends, including society life. It’s like all of those groups together, and that’s you. Somebody I can talk to about anything, do anything worth, say anything too, but also fucking eat with. You are like the friend i’ve missed in my life, the complete package. HEHE NOT JUST FRIEND, BEST FRIEND AND BEST GIRLFRIEND. IM NOT FRIENDZONING YOU. But you are the whole package, your basically the person who decided ermmm im gonna beSameen’s everything.</li>
+              <li>I couldn’t go without finishing list without saying ur FINEEE SHIT BODY, including your tiddies teehee i said it.</li>
+            </ul>
+            <p>These are just some of the reasons why I love you. IHope I can show you why you mean the world to me during your bday celebration this year. It’s a celebration on the best person I know.</p>
+            <p>And good luck on a chapter in your life, a new decade to build memories and experiences, and IHope i’m fortunate enough to be a few of those.</p>
+            <p>HAPPY 20TH BIRTHDAY WIFEY MEGAN KHANAL ENJOY THAT SHIT.</p>
+            <p>Love Sameen (your husband) x</p>
+            <p>&nbsp;</p>
+            <p>PS. YOUR MOMMMMM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Tabs click
+    document.querySelectorAll('.tab-button').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    }));
 
+    // Flip card
+    document.getElementById('birthday-card').addEventListener('click', () => {
+      document.querySelector('#birthday-card .flip-card-inner').classList.toggle('flipped');
+    });
+
+    // Countdown
+    const countdownEl = document.getElementById('countdown');
+    const targetDate = new Date('2025-08-10T12:00:00+10:00');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+      if (diff <= 0) { countdownEl.textContent = "🎉 It's here! 🎉"; clearInterval(timerInterval); return; }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    const timerInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Confetti
+    document.getElementById('confetti-button').addEventListener('click', () => {
+      confetti({ particleCount: 300, spread: 80, origin: { y: 0.6 } });
+    });
+    window.onload = () => { confetti({ particleCount: 150, spread: 60, origin: { y: 0.6 } }); };
+  </script>
+</body>
+</html>
