@@ -16,46 +16,53 @@
     .card h1 { font-family: 'Pacifico', cursive; font-size: 3rem; color: #00A000; margin-bottom: 0.5rem; }
     .card h2#timer-label { font-size: 1.5rem; color: #00A000; margin: 0.5rem 0; }
     #countdown { font-size: 2.5rem; color: #00A000; margin-bottom: 1.5rem; }
-    .photo-section { margin-bottom: 1.5rem; }
-    .photo-section img { width: 60%; max-width: 350px; height: auto; border-radius: 15px; border: 3px solid #00A000; }
+    .placeholder-img { width: 60%; max-width: 350px; height: auto; border-radius: 15px; border: 3px solid #00A000; margin: 1rem auto; display: block; }
     #confetti-button { padding: 0.8rem 1.5rem; font-size: 1.1rem; border: none; border-radius: 25px; background: #00A000; color: white; cursor: pointer; transition: background 0.3s; }
     #confetti-button:hover { background: #007000; }
     .flip-card { width: 400px; height: 500px; perspective: 1000px; margin: 0 auto; }
     .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; cursor: pointer; }
     .flip-card-inner.flipped { transform: rotateY(180deg); }
     .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; overflow-y: auto; }
-    .flip-card-front { background: #FFC0CB; border: 3px solid #00A000; display: flex; align-items: center; justify-content: center; font-family: 'Pacifico', cursive; font-size: 2rem; color: #00A000; padding: 1rem; }
+    .flip-card-front { background: #FFC0CB; border: 3px solid #00A000; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Pacifico', cursive; font-size: 2rem; color: #00A000; padding: 1rem; }
+    .flip-card-front .cake { font-size: 3rem; margin-top: 0.5rem; }
     .flip-card-back { background: #98FB98; border: 3px solid #FFC0CB; transform: rotateY(180deg); padding: 1rem; }
     .flip-card-back .back-content { text-align: left; font-size: 1rem; line-height: 1.5; color: #333; }
     .flip-card-back .back-content p, .flip-card-back .back-content ul, .flip-card-back .back-content li { margin-bottom: 0.8rem; }
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .tabs { flex-wrap: wrap; }
+      .tab-button { flex: 1 1 45%; margin: 0.2rem; font-size: 1rem; }
+      .card { padding: 1.5rem; }
+      .card h1 { font-size: 2.2rem; }
+      .flip-card { width: 100%; height: auto; }
+      .flip-card-inner, .flip-card-front, .flip-card-back { height: auto; }
+      .flip-card-front { font-size: 1.5rem; padding: 0.5rem; }
+      .flip-card-front .cake { font-size: 2.5rem; }
+      .flip-card-back { padding: 0.5rem; }
+    }
   </style>
 </head>
 <body>
-  <!-- Tabs -->
   <div class="tabs">
     <button class="tab-button active" data-tab="home-tab">Home</button>
     <button class="tab-button" data-tab="message-tab">Birthday Message</button>
   </div>
-
-  <!-- Home Tab -->
   <div id="home-tab" class="tab-content active">
     <div class="card">
       <h1>Happy 20th Birthday, Megan!</h1>
       <h2 id="timer-label">TIME UNTIL BIRTHDAY CELEBRATION</h2>
       <div id="countdown">Loading timer...</div>
-      <div class="photo-section">
-        <h2>Your Photo</h2>
-        <img src="birthday_photo.jpg" alt="Birthday Photo" />
-      </div>
+      <img src="birthday_photo.jpg" alt="Birthday Photo Placeholder" class="placeholder-img" />
       <button id="confetti-button">Celebrate!</button>
     </div>
   </div>
-
-  <!-- Message Tab -->
   <div id="message-tab" class="tab-content">
     <div class="flip-card" id="birthday-card">
       <div class="flip-card-inner">
-        <div class="flip-card-front">CLICK ME!!!!!</div>
+        <div class="flip-card-front">
+          CLICK ME!!!!!
+          <div class="cake">🎂</div>
+        </div>
         <div class="flip-card-back">
           <div class="back-content">
             <p>Dear Megan,</p>
@@ -89,47 +96,26 @@
             <p>Love Sameen (your husband) x</p>
             <p>&nbsp;</p>
             <p>PS. YOUR MOMMMMM</p>
-
-          
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
   <script>
-    // Tabs
     document.querySelectorAll('.tab-button').forEach(btn => btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById(btn.dataset.tab).classList.add('active');
     }));
-    // Flip-card interaction
     document.getElementById('birthday-card').addEventListener('click', () => {
       document.querySelector('#birthday-card .flip-card-inner').classList.toggle('flipped');
     });
-    // Countdown Timer
-    const countdownEl = document.getElementById('countdown');
-    const targetDate = new Date('2025-08-10T12:00:00+10:00');
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
-      if (diff <= 0) { countdownEl.textContent = "🎉 It's here! 🎉"; clearInterval(timerInterval); return; }
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }
-    const timerInterval = setInterval(updateCountdown, 1000); updateCountdown();
-    // Confetti
-    document.getElementById('confetti-button').addEventListener('click', () => {
-      confetti({ particleCount: 300, spread: 80, origin: { y: 0.6 } });
-    });
-    window.onload = () => { confetti({ particleCount: 150, spread: 60, origin: { y: 0.6 } }); };
+    const countdownEl = document.getElementById('countdown'); const targetDate = new Date('2025-08-10T12:00:00+10:00');
+    function updateCountdown() { const now = new Date(); const diff = targetDate - now; if (diff <= 0) { countdownEl.textContent = "🎉 It's here! 🎉"; clearInterval(timerInterval); return;} const days = Math.floor(diff/(1000*60*60*24)); const hours= Math.floor((diff/(1000*60*60))%24); const minutes=Math.floor((diff/(1000*60))%60); const seconds=Math.floor((diff/1000)%60); countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`; }
+    const timerInterval = setInterval(updateCountdown,1000); updateCountdown();
+    document.getElementById('confetti-button').addEventListener('click',()=>{confetti({particleCount:300,spread:80,origin:{y:0.6}});}); window.onload=()=>{confetti({particleCount:150,spread:60,origin:{y:0.6}});};
   </script>
 </body>
 </html>
